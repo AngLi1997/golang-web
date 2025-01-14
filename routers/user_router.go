@@ -16,10 +16,12 @@ func ListAllUsers(c *gin.Context) {
 
 func CreateUser(c *gin.Context) {
 	type UserCreateDTO struct {
-		Name     string `json:"username" binding:"required"`
+		Username string `json:"username" binding:"required"`
+		Nickname string `json:"nickname" binding:"required"`
 		Password string `json:"password" binding:"required"`
 		Age      int    `json:"age"`
 		Email    string `json:"email"`
+		Job      string `json:"job"`
 	}
 	var req UserCreateDTO
 	if err := c.ShouldBindJSON(&req); err != nil {
@@ -29,10 +31,12 @@ func CreateUser(c *gin.Context) {
 		return
 	}
 	m := model.User{
-		Name:     req.Name,
+		Username: req.Username,
+		Nickname: req.Nickname,
 		Password: req.Password,
 		Age:      req.Age,
 		Email:    req.Email,
+		Job:      req.Job,
 		Status:   1,
 	}
 	dao.CreateUser(&m, global.DB)

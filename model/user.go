@@ -5,10 +5,16 @@ import (
 )
 
 type User struct {
-	Name     string `json:"name"`
+	Username string `json:"username"`
+	Nickname string `json:"nickname"`
 	Email    string `json:"email"`
 	Password string `json:"password"`
 	Age      int    `json:"age"`
+	Job      string `json:"job"`
 	Status   int    `json:"status"`
 	gorm.Model
+}
+
+func (User) TableName() string {
+	return "user"
 }
