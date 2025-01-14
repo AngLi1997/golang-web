@@ -7,7 +7,7 @@ import (
 
 func InitRouters() {
 	r := gin.Default()
-
+	r.Use(TokenAuth())
 	userGroup := r.Group("/user")
 	userGroup.GET("/list_users", routers.ListAllUsers)
 	userGroup.POST("/create_user", routers.CreateUser)
