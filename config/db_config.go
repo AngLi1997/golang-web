@@ -2,6 +2,7 @@ package config
 
 import (
 	"go-test/global"
+	"go-test/model"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
@@ -21,4 +22,9 @@ func ConnectToSQLiteDB(dbPath string) {
 		Logger: logger.Default.LogMode(logger.Info),
 	})
 	global.DB = db
+
+	err := db.AutoMigrate(&model.User{})
+	if err != nil {
+		return
+	}
 }
